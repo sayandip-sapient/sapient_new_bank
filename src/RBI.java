@@ -8,10 +8,13 @@ import java.io.InputStreamReader;
 public interface RBI {
 
 //    double balance=1000.0D;
+    void addInitialamount(Customer customer);
+void displayCustomers();
+    void addCustomer(Customer customer);
 
-    void deposit(double amount);
+    void deposit(double amount, Customer customer);
 
-    void withdraw(double amount);
+    void withdraw(double amount,Customer customer);
 
     void createFixedDeposit(double amount, int durationInYears,double roi);
 

@@ -1,6 +1,6 @@
 public class Customer {
     String customerName, customerEmail, customerAddress, customerGender, customerAadhar, customerPhone;
-    float balance;
+    float balance=0.0F;
 
     public Customer() {
     }
@@ -12,7 +12,7 @@ public class Customer {
         this.customerGender = customerGender;
         this.customerAadhar = customerAadhar;
         this.customerPhone = customerPhone;
-        this.balance = balance;
+        this.balance += balance;
     }
 
     public String getCustomerName() {
@@ -67,7 +67,20 @@ public class Customer {
         return balance;
     }
 
-    public void setBalance(float balance) {
-        this.balance = balance;
+    public void setBalance(double balance) {
+        this.balance += balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerName='" + customerName + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", customerGender='" + customerGender + '\'' +
+                ", customerAadhar='" + customerAadhar + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

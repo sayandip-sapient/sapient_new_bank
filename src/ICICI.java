@@ -1,43 +1,76 @@
+import java.util.*;
+
+
 public class ICICI implements RBI {
     double balance;
     int count=0;
     double roi;
     int year;
+    public List<Customer> customers;
+    public Map<String, Customer> myHashMap ;
+
 
 
 
     ICICI (){
-         balance=1000.0D;
-         roi=6.0D;
-          year=3;
+        balance=1000.0D;
+        roi=5.0D;
+        year=3;
+        customers = new ArrayList<>();
+        myHashMap = new HashMap<>();
+
+
+
+    }
+    @Override
+    public void addInitialamount(Customer customer) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("add initial amount you want to add should be more than 1000");
+        System.out.print("Enter initial balance: ");
+        float balance = scanner.nextFloat();
+        customer.balance=balance;
+//        this.balance=balance;
+    }
+
+    @Override
+    public void displayCustomers() {
+        System.out.println("Customers in HDFC bank:");
+        for (Customer customer : customers) {
+            System.out.println(customer);
+        }
+    }
+    @Override
+    public void addCustomer(Customer customer) {
+        addInitialamount(customer);
+        customers.add(customer);
+        myHashMap.put(customer.customerAadhar, customer);
+        System.out.println("Customer added to HDFC bank.");
+    }
+    @Override
+    public void deposit(double amount,Customer customer) {
+        if (amount >= 0) {
+            System.out.println(customer.balance+"hiii");
+            customer.balance += amount;
+            System.out.println("Deposit successful. " + customer);
+        } else {
+            System.out.println("Invalid deposit amount. Please enter a non-negative value.");
+        }
 
     }
 
     @Override
-    public void deposit(double amount) {
-       if (amount >= 0) {
-           System.out.println(balance+"hiii");
-                balance += amount;
-                System.out.println("Deposit successful. Your new balance is: " + balance);
-            } else {
-                System.out.println("Invalid deposit amount. Please enter a non-negative value.");
-            }
-
-    }
-
-    @Override
-    public void withdraw(double withdrawAmount) {
+    public void withdraw(double withdrawAmount, Customer customer) {
         count++;
-        if(count>3 && (withdrawAmount+((1*withdrawAmount)/100) <= balance-1000) ){
-                balance=balance-withdrawAmount-((1*withdrawAmount)/100);
-                System.out.println("Deposit successful. Your new balance is: " + balance);
-            }
-           else if (withdrawAmount <= balance-1000) {
-               balance=balance-withdrawAmount;
-                System.out.println("Deposit successful. Your new balance is: " + balance);
-            } else {
-                System.out.println("Invalid deposit amount. Please enter a non-negative value.");
-            }
+        if(count>3 && (withdrawAmount+((1*withdrawAmount)/100) <= customer.balance-1000) ){
+            customer.balance= (float) (customer.balance-withdrawAmount-((1*withdrawAmount)/100));
+            System.out.println("Deposit successful. Your new balance is: " +customer.balance);
+        }
+        else if (withdrawAmount <= customer.balance-1000) {
+            customer.balance= (float) (customer.balance-withdrawAmount);
+            System.out.println("Deposit successful. Your new balance is: " + customer.balance);
+        } else {
+            System.out.println("Invalid deposit amount. Please enter a non-negative value.");
+        }
 
     }
 
@@ -83,3 +116,4 @@ public class ICICI implements RBI {
 
     }
 }
+
